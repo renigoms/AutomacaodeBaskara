@@ -1,15 +1,29 @@
-from vpython import *
+class SuperClass:
+    def __init__(self, nome: str):
+        self.nome = nome
 
-bola = sphere(pos=vector(-5, 1, 0), radius=0.5, color=color.blue, velocity=vector(10, 0, 0))
-bola2 = sphere(pos=vector(-5, 0, 0), radius=0.5, color=color.white, velocity=vector(10, 0, 0))
-muro = box(pos=vector(5, 0, 0), color=color.red, size=vector(0.5, 10, 10))
-dt = 0.01
-t = 0
-while t < 3:
-    rate(100)
-    bola.pos.x = bola.pos.x + (bola.velocity.x * dt)
-    if bola.pos.x >= muro.pos.x:
-        bola.velocity.x = -bola.velocity.x
-    t = t + dt
-print("A BOLA SE DESLOCOU ", bola.pos.x - (-5), " METROS")
-print("A BOLA SE DESLOCOU ", t, " SEGUNDOS")
+    def getNome(self):
+        return self.nome
+
+ 
+class SuperClass2:
+    def __init__(self, nome: str):
+        self.nome = nome
+
+    def getNome2(self):
+        return self.nome
+
+
+class SubClass(SuperClass, SuperClass2):
+    def __init__(self, nome1: str, nome2: str, nome3:str):
+        super().__init__(nome2)
+        super().__init__(nome3)
+        self.nome1 = nome1
+
+    def __str__(self):
+        return f"{self.nome1} e {self.getNome()} e {self.getNome2()}"
+
+
+subClasse = SubClass("renan", "renata", "Afonso")
+
+print(subClasse)
